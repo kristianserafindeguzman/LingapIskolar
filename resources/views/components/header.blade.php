@@ -7,7 +7,7 @@
 
         @guest
             <x-button :href="route('login')">Log In</x-button>
-            <x-button :href="route('signup')">Sign Up</x-button>
+            <x-button :href="route('signup')" :variant="'secondary'">Sign Up</x-button>
         @endguest
     </div>
 </header>
