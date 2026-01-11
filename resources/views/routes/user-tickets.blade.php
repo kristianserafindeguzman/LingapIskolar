@@ -9,9 +9,6 @@
             <p class="text-gray-600">{{ auth()->user()->email }}</p>
         </div>
         <p>Page not implemented yet. Go and log out for testing</p>
-        <form method="POST" action="/logout">
-            @csrf
-            <x-button :type="'submit'">Log Out</x-button>
-        </form>
+        <x-button :href="'/logout'">Log Out</x-button>
     </div>
 @endsection

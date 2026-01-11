@@ -28,10 +28,14 @@ Route::get("/signup", function () {
 
 Route::post("/signup", [UserController::class, "sign"]);
 
+Route::get("/logout", function () {
+    return view("routes.logout");
+})->name("logout");
+
 Route::post("/logout", function () {
     Auth()->logout();
     return redirect("/");
-})->name("logout");
+});
 
 Route::middleware("auth")->group(function () {
     Route::get("/dashboard", function () {

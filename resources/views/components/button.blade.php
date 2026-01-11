@@ -1,4 +1,3 @@
-
 @if ($href)
     <a href="{{ $href }}" {{ $attributes->merge(["class" => $getStyles()]) }}>
         {{ $slot }}
