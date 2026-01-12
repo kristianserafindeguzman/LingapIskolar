@@ -6,26 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class SystemSetting extends Model
 {
-    
     public $timestamps = false;
 
-    protected $fillable = [
-        'key',
-        'value',
+    protected $fillable = ["key", "value"];
 
-    ];
-
-    public static function get($key, $default = null){
-        $setting = static::where('key', $key)->first();
+    public static function get($key, $default = null)
+    {
+        $setting = static::where("key", $key)->first();
         return $setting ? $setting->value : $default;
     }
 
-    public static function set($key, $value){
-        return static::updateOrCreate(
-            ['key' => $key],
-            ['value' => $value]
-        );
+    public static function set($key, $value)
+    {
+        return static::updateOrCreate(["key" => $key], ["value" => $value]);
     }
-
-
 }

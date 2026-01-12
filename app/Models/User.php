@@ -9,7 +9,6 @@ use Illuminate\Notifications\Notifiable;
 use PHPUnit\Framework\Attributes\Ticket;
 use Spatie\Permission\Traits\HasRoles;
 
-
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -20,21 +19,14 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $fillable = ["name", "email", "password"];
 
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    protected $hidden = ["password", "remember_token"];
 
     /**
      * Get the attributes that should be cast.
@@ -44,55 +36,59 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            "email_verified_at" => "datetime",
+            "password" => "hashed",
         ];
     }
 
-//Relationships
+    //Relationships
 
-public function tickets()
-{
-    return $this->hasManyThrough(
-        Ticket::class,
-        TicketAssignment::class,
-        'agent_id',
-        'id',
-        'id',
-        'ticket_id'
-    );
-}
+    public function tickets()
+    {
+        return $this->hasManyThrough(
+            Ticket::class,
+            TicketAssignment::class,
+            "agent_id",
+            "id",
+            "id",
+            "ticket_id",
+        );
+    }
 
-public function ticketAssignments(){
-    return $this->hasMany(TicketAssignment::class, 'agent_id');
-}
+    public function ticketAssignments()
+    {
+        return $this->hasMany(TicketAssignment::class, "agent_id");
+    }
 
+    public function ticketMessages()
+    {
+        return $this->hasMany(TicketMessage::class, "sender_id");
+    }
 
-public function ticketMessages(){
-    return $this->hasMany(TicketMessage::class, 'sender_id');
-}
+    public function activityLogs()
+    {
+        return $this->hasMany(TicketActivityLog::class, "performed_by");
+    }
 
-public function activityLogs(){
-    return $this->hasMany(TicketActivityLog::class, 'performed_by');
-}
+    //Helper Methods
 
+    public function isAdmin()
+    {
+        return $this->hasRole("admin");
+    }
 
-//Helper Methods
+    public function isManager()
+    {
+        return $this->hasRole("support-manager");
+    }
 
-public function isAdmin(){
-    return $this->hasRole('admin');
-}
+    public function isAgent()
+    {
+        return $this->hasRole("agent");
+    }
 
-public function isManager(){
-    return $this->hasRole('support-manager');
-}
-
-public function isAgent(){
-    return $this->hasRole('agent');
-}
-
-public function isUser(){
-    return $this->hasRole('user');
-}
-
+    public function isUser()
+    {
+        return $this->hasRole("user");
+    }
 }

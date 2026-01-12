@@ -8,17 +8,17 @@ use Illuminate\Database\Eloquent\Builder;
 class Ticket extends Model
 {
     protected $fillable = [
-        'user_id',
-        'category_id',
-        'status_id',
-        'priority_id',
-        'subject',
-        'description',
+        "user_id",
+        "category_id",
+        "status_id",
+        "priority_id",
+        "subject",
+        "description",
     ];
 
     protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        "created_at" => "datetime",
+        "updated_at" => "datetime",
     ];
 
     // Relationships
@@ -49,17 +49,18 @@ class Ticket extends Model
 
     public function currentAssignment()
     {
-        return $this->hasOne(TicketAssignment::class)->latest('assigned_at');
+        return $this->hasOne(TicketAssignment::class)->latest("assigned_at");
     }
 
     public function assignedAgent()
     {
-        return $this->belongsTo(User::class, 'agent_id')
-            ->join('ticket_assignments', function($join) {
-                $join->on('users.id', '=', 'ticket_assignments.agent_id')
-                     ->on('tickets.id', '=', 'ticket_assignments.ticket_id');
+        return $this->belongsTo(User::class, "agent_id")
+            ->join("ticket_assignments", function ($join) {
+                $join
+                    ->on("users.id", "=", "ticket_assignments.agent_id")
+                    ->on("tickets.id", "=", "ticket_assignments.ticket_id");
             })
-            ->latest('ticket_assignments.assigned_at');
+            ->latest("ticket_assignments.assigned_at");
     }
 
     public function messages()
@@ -69,12 +70,15 @@ class Ticket extends Model
 
     public function publicMessages()
     {
-        return $this->hasMany(TicketMessage::class)->where('is_internal', false);
+        return $this->hasMany(TicketMessage::class)->where(
+            "is_internal",
+            false,
+        );
     }
 
     public function internalNotes()
     {
-        return $this->hasMany(TicketMessage::class)->where('is_internal', true);
+        return $this->hasMany(TicketMessage::class)->where("is_internal", true);
     }
 
     public function attachments()
@@ -88,18 +92,20 @@ class Ticket extends Model
     }
 
     // RBAC Query Scopes
-    
+
     // Users can only see their own tickets
     public function scopeForUser(Builder $query, User $user)
     {
-        return $query->where('user_id', $user->id);
+        return $query->where("user_id", $user->id);
     }
 
     // Agents can only see tickets assigned to them
     public function scopeForAgent(Builder $query, User $agent)
     {
-        return $query->whereHas('currentAssignment', function($q) use ($agent) {
-            $q->where('agent_id', $agent->id);
+        return $query->whereHas("currentAssignment", function ($q) use (
+            $agent,
+        ) {
+            $q->where("agent_id", $agent->id);
         });
     }
 
@@ -127,29 +133,29 @@ class Ticket extends Model
     // Other useful scopes
     public function scopeByStatus(Builder $query, $statusId)
     {
-        return $query->where('status_id', $statusId);
+        return $query->where("status_id", $statusId);
     }
 
     public function scopeByPriority(Builder $query, $priorityId)
     {
-        return $query->where('priority_id', $priorityId);
+        return $query->where("priority_id", $priorityId);
     }
 
     public function scopeByCategory(Builder $query, $categoryId)
     {
-        return $query->where('category_id', $categoryId);
+        return $query->where("category_id", $categoryId);
     }
 
     public function scopeOpen(Builder $query)
     {
-        return $query->whereHas('status', function($q) {
-            $q->where('name', 'Open');
+        return $query->whereHas("status", function ($q) {
+            $q->where("name", "Open");
         });
     }
 
     public function scopeUnassigned(Builder $query)
     {
-        return $query->doesntHave('currentAssignment');
+        return $query->doesntHave("currentAssignment");
     }
 
     // Helper methods
@@ -165,11 +171,11 @@ class Ticket extends Model
 
     public function isOpen()
     {
-        return $this->status->name === 'Open';
+        return $this->status->name === "Open";
     }
 
     public function isClosed()
     {
-        return in_array($this->status->name, ['Resolved', 'Closed']);
+        return in_array($this->status->name, ["Resolved", "Closed"]);
     }
 }
