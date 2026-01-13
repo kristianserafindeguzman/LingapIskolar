@@ -27,11 +27,11 @@ class SelectInput extends Component
 
     public function getStyleOfInput(): string
     {
-        $base =
-            "w-full rounded-full border-2 border-amber-400 bg-white p-4 outline-none";
-        if ($this->icon) {
-            return $base . " " . "pl-16";
-        }
-        return $base;
+        // Professional neutral border with a focus transition
+        $base = "w-full rounded-2xl border border-zinc-300 bg-white p-4 text-zinc-900 
+             appearance-none outline-none transition-all duration-200 
+             focus:border-red-800 focus:ring-4 focus:ring-red-800/5 shadow-sm";
+
+        return $this->icon ? $base . " pl-14" : $base;
     }
 }
