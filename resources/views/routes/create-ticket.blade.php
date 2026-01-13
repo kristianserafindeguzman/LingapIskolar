@@ -22,7 +22,7 @@
                     :label="'Description'"
                     :id="'description'"
                 ></x-text-box-input>
-                <x-select-input :id="'category'">
+                <x-select-input :id="'category'" :label="'Category'">
                     <option disabled selected value="initial">Category</option>
                     <option value="scholarship">Scholarship</option>
                     <option value="inquiry">Inquiry</option>

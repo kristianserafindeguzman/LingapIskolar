@@ -12,6 +12,7 @@ class SelectInput extends Component
      * Create a new component instance.
      */
     public function __construct(
+        public ?string $label = null,
         public ?string $icon = null,
         public ?string $value = null,
         public string $id,
