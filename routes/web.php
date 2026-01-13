@@ -13,6 +13,10 @@ $tickets = [
         "description" =>
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "category" => "Scholarship",
+        "priority" => "Urgent",
+        "requested_by" => "Sample User",
+        "assigned_to" => "Reimu Hakurei",
+        "assignee_title" => "Shrine Maiden",
     ],
     [
         "id" => "0000-0002",
@@ -21,6 +25,22 @@ $tickets = [
         "description" =>
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         "category" => "Scholarship",
+        "priority" => "High",
+        "requested_by" => "Sample User",
+        "assigned_to" => "Marisa Kirisame",
+        "assignee_title" => "Human Magician",
+    ],
+    [
+        "id" => "0000-0003",
+        "status" => "Closed",
+        "subject" => "Idiot found on the bathroom",
+        "description" =>
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+        "category" => "Scholarship",
+        "priority" => "Medium",
+        "requested_by" => "Sample User",
+        "assigned_to" => "Cirno",
+        "assignee_title" => "Stupid Fairy"
     ],
 ];
 
@@ -120,7 +140,6 @@ Route::middleware("auth")->group(function () use ($tickets) {
     })->name("ticket-details");
 
     Route::post("/ticket/{id}/reply", function (Request $request, string $id) {
-        
         $data = $request->all();
         $data["ticket_id"] = $id;
         $data["user_id"] = auth()->user()->id;

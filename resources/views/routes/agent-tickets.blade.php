@@ -43,29 +43,10 @@
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-            <x-counter
-                :name="'Overdue'"
-                :value="1"
-                :color="'red-600'"
-
-            />
-            <x-counter
-                :name="'Unassigned'"
-                :value="1"
-                :color="'zinc-400'"
-
-            />
-            <x-counter
-                :name="'Escalated'"
-                :value="1"
-                :color="'amber-500'"
-
-            />
-            <x-counter
-                :name="'Resolved'"
-                :value="1"
-                :color="'green-600'"
-            />
+            <x-counter :name="'Overdue'" :value="1" :color="'red-600'" />
+            <x-counter :name="'Unassigned'" :value="1" :color="'zinc-400'" />
+            <x-counter :name="'Escalated'" :value="1" :color="'amber-500'" />
+            <x-counter :name="'Resolved'" :value="1" :color="'green-600'" />
         </div>
 
         <div
@@ -83,10 +64,7 @@
                 />
 
                 <div class="flex flex-1 items-center gap-4">
-                    <x-select-input
-                        :id="'status'"
-                        :label="'Filter Status'"
-                    >
+                    <x-select-input :id="'status'" :label="'Filter Status'">
                         <option value="">All Statuses</option>
                         <option value="open">Open</option>
                         <option value="pending">Pending</option>
@@ -100,6 +78,8 @@
                         <option value="">All Levels</option>
                         <option value="urgent">Urgent</option>
                         <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
                     </x-select-input>
                 </div>
 
@@ -130,14 +110,19 @@
                         <th class="border-b border-zinc-200 px-6 py-4">
                             Ticket ID
                         </th>
+                        
+                        <th class="border-b border-zinc-200 px-6 py-4">
+                            Requester
+                        </th>
                         <th class="border-b border-zinc-200 px-6 py-4">
                             Subject & Description
                         </th>
-                        <th class="border-b border-zinc-200 px-6 py-4">
-                            Category
-                        </th>
+                        
                         <th class="border-b border-zinc-200 px-6 py-4">
                             Status
+                        </th>
+                        <th class="border-b border-zinc-200 px-6 py-4">
+                            Priority
                         </th>
                         <th
                             class="border-b border-zinc-200 px-6 py-4 text-right"
@@ -156,6 +141,12 @@
                                     #{{ $ticket["id"] }}
                                 </span>
                             </td>
+                            <td class="px-6 py-5 align-top">
+                                
+                                    {{ $ticket["requested_by"] }}
+                                
+                            </td>
+                            
                             <td class="px-6 py-5">
                                 <div
                                     class="font-bold text-zinc-900 transition-colors group-hover:text-red-800"
@@ -168,19 +159,16 @@
                                     {{ $ticket["description"] }}
                                 </div>
                             </td>
-                            <td class="px-6 py-5 align-top">
-                                <span
-                                    class="inline-flex items-center rounded-md bg-zinc-100 px-2.5 py-0.5 text-xs font-semibold text-zinc-700 ring-1 ring-zinc-200 ring-inset"
-                                >
-                                    {{ $ticket["category"] }}
-                                </span>
-                            </td>
+                            
                             <td class="px-6 py-5 align-top">
                                 <x-ticket-status :status="$ticket['status']" />
                             </td>
+                            <td class="px-6 py-5 align-top">
+                                <x-ticket-priority :priority="$ticket['priority']" />
+                            </td>
                             <td class="px-6 py-5 text-right align-top">
                                 <a
-                                    href="#"
+                                    href="/ticket/{{ $ticket["id"] }}"
                                     class="inline-flex items-center text-sm font-bold text-red-800 transition hover:text-red-600"
                                 >
                                     Manage
