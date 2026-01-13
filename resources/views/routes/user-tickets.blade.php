@@ -45,13 +45,9 @@
             <x-counter
                 :name="'In Progress'"
                 :value="1"
-                class="border-l-4 border-l-amber-500 bg-white shadow-sm"
+                :color="'amber-500'"
             />
-            <x-counter
-                :name="'Closed'"
-                :value="1"
-                class="border-l-4 border-l-red-600 bg-white shadow-sm"
-            />
+            <x-counter :name="'Closed'" :value="1" :color="'red-600'" />
         </div>
         <div
             class="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"

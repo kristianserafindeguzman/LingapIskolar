@@ -1,7 +1,7 @@
 <div
     {{
         $attributes->merge([
-            "class" => "flex flex-1 flex-col gap-1 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md",
+            "class" => $getStyle(),
         ])
     }}
 >

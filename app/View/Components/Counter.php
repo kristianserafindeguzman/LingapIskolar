@@ -11,8 +11,11 @@ class Counter extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public string $name, public string $value)
-    {
+    public function __construct(
+        public string $name,
+        public string $value,
+        public ?string $color = "green-600",
+    ) {
         //
     }
 
@@ -22,5 +25,13 @@ class Counter extends Component
     public function render(): View|Closure|string
     {
         return view("components.counter");
+    }
+
+    public function getStyle(): string
+    {
+        $base =
+            "flex flex-1 flex-col gap-1 rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm transition-all hover:shadow-md border-l-4 bg-white shadow-sm";
+
+        return $this->color ? $base . " border-l-" . $this->color : $base;
     }
 }

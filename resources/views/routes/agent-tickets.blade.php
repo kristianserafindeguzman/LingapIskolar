@@ -46,22 +46,25 @@
             <x-counter
                 :name="'Overdue'"
                 :value="1"
-                class="border-l-4 border-l-red-600 bg-white shadow-sm"
+                :color="'red-600'"
+
             />
             <x-counter
                 :name="'Unassigned'"
                 :value="1"
-                class="border-l-4 border-l-zinc-400 bg-white shadow-sm"
+                :color="'zinc-400'"
+
             />
             <x-counter
                 :name="'Escalated'"
                 :value="1"
-                class="border-l-4 border-l-amber-500 bg-white shadow-sm"
+                :color="'amber-500'"
+
             />
             <x-counter
                 :name="'Resolved'"
                 :value="1"
-                class="border-l-4 border-l-green-600 bg-white shadow-sm"
+                :color="'green-600'"
             />
         </div>
 
