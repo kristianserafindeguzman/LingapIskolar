@@ -3,7 +3,7 @@
 @section("main")
     <div class="flex w-full flex-col gap-6 bg-zinc-50/50 p-6 px-10">
         <div
-            class="flex items-end justify-between border-b border-zinc-200 pb-6"
+            class="flex items-end justify-between border-b border-zinc-200 pb-6 md:flex-row flex-col gap-4"
         >
             <div class="flex items-center gap-4">
                 <h1
@@ -24,7 +24,7 @@
             </x-button>
         </div>
 
-        <div class="flex flex-row items-start gap-8">
+        <div class="flex md:flex-row flex-col items-start gap-8">
             <div class="flex flex-1 flex-col gap-6">
                 <div
                     class="rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"

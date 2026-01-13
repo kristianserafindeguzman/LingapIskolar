@@ -1,5 +1,5 @@
 <div
-    class="overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm"
+    class="overflow-x overflow-scroll rounded-xl border border-zinc-200 bg-white shadow-sm"
 >
     <table class="w-full border-collapse text-left">
         <thead>

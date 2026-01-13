@@ -17,7 +17,7 @@
 @section("main")
     <div class="flex w-full flex-col gap-6 bg-zinc-50/50 p-6 px-10">
         <div
-            class="flex items-end justify-between border-b border-zinc-200 pb-6"
+            class="flex justify-between border-b border-zinc-200 pb-6 md:flex-row flex-col gap-4"
         >
             <div>
                 <h1
@@ -63,7 +63,9 @@
                     value="{{ request("search") }}"
                 />
 
-                <div class="flex flex-1 items-center gap-4">
+                <div
+                    class="flex flex-1 flex-col items-center gap-4 md:flex-row"
+                >
                     <x-select-input :id="'status'" :label="'Filter Status'">
                         <option value="">All Statuses</option>
                         <option value="open">Open</option>
@@ -81,24 +83,26 @@
                         <option value="medium">Medium</option>
                         <option value="low">Low</option>
                     </x-select-input>
-                </div>
-
-                <div class="flex gap-2">
-                    <x-button type="submit" class="min-w-32">
-                        Apply Filters
-                    </x-button>
-                    @if (request()->anyFilled(["status", "priority"]))
-                        <a
-                            href="{{ route("dashboard") }}"
-                            class="flex items-center px-4 text-sm font-medium text-zinc-500 transition hover:text-red-800"
-                        >
-                            Clear
-                        </a>
-                    @endif
+                    <div class="flex gap-2 md:flex-row flex-col items-center">
+                        <x-button type="submit" class="min-w-32">
+                            Apply Filters
+                        </x-button>
+                        @if (request()->anyFilled(["status", "priority"]))
+                            <a
+                                href="{{ route("dashboard") }}"
+                                class="flex items-center px-4 text-sm font-medium text-zinc-500 transition hover:text-red-800"
+                            >
+                                Clear
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </form>
         </div>
 
-        <x-ticket-table :columns="['id', 'requested_by', 'subject', 'status', 'priority']" :tickets="$tickets" />
+        <x-ticket-table
+            :columns="['id', 'requested_by', 'subject', 'status', 'priority']"
+            :tickets="$tickets"
+        />
     </div>
 @endsection

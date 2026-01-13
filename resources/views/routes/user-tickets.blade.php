@@ -17,7 +17,7 @@
 @section("main")
     <div class="flex w-full flex-col gap-6 bg-zinc-50/50 p-6 px-10">
         <div
-            class="flex items-end justify-between border-b border-zinc-200 pb-6"
+            class="flex flex-col justify-between gap-4 border-b border-zinc-200 pb-6 md:flex-row"
         >
             <div>
                 <h1
@@ -29,7 +29,7 @@
                     Track and manage your support requests
                 </p>
             </div>
-            <div class="flex gap-4">
+            <div class="flex flex-col gap-4 md:flex-row">
                 <x-button
                     :variant="'secondary'"
                     onclick="location.reload()"
@@ -63,33 +63,42 @@
                     value="{{ request("search") }}"
                 />
 
-                <div class="flex flex-1 items-center gap-4">
-                    <x-select-input :id="'status'" :label="'Filter Status'">
+                <div
+                    class="flex flex-1 flex-col items-center gap-4 md:flex-row"
+                >
+                    <x-select-input
+                        :id="'status'"
+                        :label="'Filter Status'"
+                        :value="request('status')"
+                    >
                         <option value="">All Statuses</option>
                         <option value="open">Open</option>
                         <option value="pending">Pending</option>
                         <option value="closed">Closed</option>
                     </x-select-input>
 
-                    <x-select-input :id="'category'" :label="'Category'">
+                    <x-select-input
+                        :id="'category'"
+                        :label="'Category'"
+                        :value="request('category')"
+                    >
                         <option value="">All Levels</option>
-                        <option value="urgent">Graduation</option>
-                        <option value="high">Documents</option>
+                        <option value="graduation">Graduation</option>
+                        <option value="documents">Documents</option>
                     </x-select-input>
-                </div>
-
-                <div class="flex gap-2">
-                    <x-button type="submit" class="min-w-32">
-                        Apply Filters
-                    </x-button>
-                    @if (request()->anyFilled(["status", "category"]))
-                        <a
-                            href="{{ route("dashboard") }}"
-                            class="flex items-center px-4 text-sm font-medium text-zinc-500 transition hover:text-red-800"
-                        >
-                            Clear
-                        </a>
-                    @endif
+                    <div class="flex flex-col items-center gap-2 md:flex-row">
+                        <x-button type="submit" class="min-w-32">
+                            Apply Filters
+                        </x-button>
+                        @if (request()->anyFilled(["status", "category"]))
+                            <a
+                                href="{{ route("dashboard") }}"
+                                class="flex items-center px-4 text-sm font-medium text-zinc-500 transition hover:text-red-800"
+                            >
+                                Clear
+                            </a>
+                        @endif
+                    </div>
                 </div>
             </form>
         </div>
