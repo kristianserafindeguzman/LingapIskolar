@@ -24,7 +24,7 @@
             </x-slot>
         </x-page-header>
         <div class="flex flex-col items-start gap-8 md:flex-row">
-            <div class="flex flex-1 flex-col gap-6">
+            <div class="flex w-full flex-1 flex-col gap-6">
                 <x-ticket-details :ticket="$ticket" />
 
                 <div
@@ -81,7 +81,7 @@
             </div>
 
             <div class="flex w-full flex-col gap-6 md:w-80">
-                <x-ticket-details-user :ticket="$ticket" :user="'agent'"/>
+                <x-ticket-details-user :ticket="$ticket" :user="'agent'" />
             </div>
         </div>
     </div>
