@@ -41,7 +41,7 @@
             </x-slot>
         </x-page-header>
         <div class="flex flex-col items-start gap-8 md:flex-row">
-            <div class="flex flex-1 flex-col gap-6">
+            <div class="flex flex-1 flex-col gap-6 w-full">
                 <x-ticket-details
                     :ticket="$ticket"
                     :columns="['subject', 'description', 'category', 'priority']"

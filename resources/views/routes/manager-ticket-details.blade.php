@@ -24,7 +24,7 @@
             </x-slot>
         </x-page-header>
         <div class="flex flex-col items-start gap-8 md:flex-row">
-            <div class="flex flex-1 flex-col gap-6">
+            <div class="flex w-full flex-1 flex-col gap-6">
                 <x-ticket-details
                     :ticket="$ticket"
                     :columns="['subject', 'description', 'category', 'priority']"
@@ -84,8 +84,8 @@
             </div>
 
             <div class="flex w-full flex-col gap-6 md:w-80">
-                <x-ticket-details-user :ticket="$ticket" :user="'user'"/>
-                <x-ticket-details-user :ticket="$ticket" :user="'agent'"/>
+                <x-ticket-details-user :ticket="$ticket" :user="'user'" />
+                <x-ticket-details-user :ticket="$ticket" :user="'agent'" />
                 <div
                     class="flex flex-col rounded-2xl border border-zinc-200 bg-white p-6 shadow-sm"
                 >
