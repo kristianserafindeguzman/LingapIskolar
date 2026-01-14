@@ -17,6 +17,7 @@
                         Requester
                     </th>
                 @endif
+
                 @if (in_array("assigned_to", $columns))
                     <th class="border-b border-zinc-200 px-6 py-4">
                         Assigned Agent
@@ -46,7 +47,7 @@
             @forelse ($tickets as $ticket)
                 <tr class="group transition-all hover:bg-zinc-50/80">
                     @if (in_array("id", $columns))
-                        <td class="px-6 py-5 align-top">
+                        <td class="px-6 py-5">
                             <span
                                 class="rounded bg-red-50 px-2 py-1 font-mono text-sm font-bold text-red-700"
                             >
@@ -56,12 +57,13 @@
                     @endif
 
                     @if (in_array("requested_by", $columns))
-                        <td class="px-6 py-5 align-top">
+                        <td class="px-6 py-5">
                             {{ $ticket["requested_by"] }}
                         </td>
                     @endif
+
                     @if (in_array("assigned_to", $columns))
-                        <td class="px-6 py-5 align-top">
+                        <td class="px-6 py-5">
                             {{ $ticket["assigned_to"] }}
                         </td>
                     @endif
@@ -82,27 +84,31 @@
                     @endif
 
                     @if (in_array("status", $columns))
-                        <td class="px-6 py-5 align-top">
+                        <td class="px-6 py-5">
                             <x-ticket-status :status="$ticket['status']" />
                         </td>
                     @endif
 
                     @if (in_array("priority", $columns))
-                        <td class="px-6 py-5 align-top">
+                        <td class="px-6 py-5">
                             <x-ticket-priority
                                 :priority="$ticket['priority']"
                             />
                         </td>
                     @endif
 
-                    <td class="px-6 py-5 text-right align-top">
-                        <a
-                            href="/ticket/{{ $ticket["id"] }}"
-                            class="inline-flex items-center text-sm font-bold text-red-800 transition hover:text-red-600"
-                        >
-                            View Ticket
-                            <i class="bi bi-chevron-right ml-1"></i>
-                        </a>
+                    <td
+                        class="flex flex-col items-end gap-4 px-6 py-5 align-top"
+                    >
+                        <div>
+                            <x-button :href="'/ticket/' . $ticket['id']">
+                                View Ticket
+                            </x-button>
+                        </div>
+
+                        @if (Auth()->user()->isManager())
+                            <x-assign-agent-modal :ticket="$ticket" />
+                        @endif
                     </td>
                 </tr>
             @empty

@@ -3,7 +3,7 @@
 @section("headerside")
     <form
         method="GET"
-        class="w-full max-w-[40%]"
+        class="hidden w-full max-w-[40%] md:block"
         action="{{ route("dashboard") }}"
     >
         <x-text-input
@@ -22,13 +22,10 @@
                     <h1
                         class="text-3xl font-black tracking-tight text-zinc-900 uppercase"
                     >
-                        Agent Dashboard
+                        Manager Dashboard
                     </h1>
                     <p class="text-lg text-zinc-500">
-                        Active tickets for
-                        <span class="font-semibold text-red-800">
-                            {{ auth()->user()->name }}
-                        </span>
+                        Assign tickets to agents and manage their tickets
                     </p>
                 </div>
             </x-slot>
@@ -45,10 +42,14 @@
         </x-page-header>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-            <x-counter :name="'Overdue'" :value="1" :color="'red-600'" />
-            <x-counter :name="'Unassigned'" :value="1" :color="'zinc-400'" />
-            <x-counter :name="'Escalated'" :value="1" :color="'amber-500'" />
-            <x-counter :name="'Resolved'" :value="1" :color="'green-600'" />
+            <x-counter :name="'Open'" :value="1" :color="'green-600'" />
+            <x-counter
+                :name="'Unassigned'"
+                :value="1"
+                :color="'amber-500'"
+            />
+            <x-counter :name="'Escalated'" :value="1" :color="'red-600'" />
+            <x-counter :name="'Resolved'" :value="1" :color="'zinc-400'" />
         </div>
 
         <div
@@ -59,15 +60,17 @@
                 action="{{ route("dashboard") }}"
                 class="flex w-full items-center gap-6"
             >
-                <input
-                    type="hidden"
-                    name="search"
-                    value="{{ request("search") }}"
-                />
-
                 <div
                     class="flex flex-1 flex-col items-center gap-4 md:flex-row"
                 >
+                    <div class="block md:hidden w-full">
+                        <x-text-input
+                            :id="'search'"
+                            :icon="'bi-search'"
+                            :value="request('search')"
+                            :label="'Search'"
+                        />
+                    </div>
                     <x-select-input :id="'status'" :label="'Filter Status'">
                         <option value="">All Statuses</option>
                         <option value="open">Open</option>
@@ -103,8 +106,8 @@
         </div>
 
         <x-ticket-table
-            :columns="['id', 'requested_by', 'subject', 'status', 'priority']"
+            :columns="['id', 'requested_by', 'subject', 'assigned_to', 'status', 'priority']"
             :tickets="$tickets"
-        />
+        ></x-ticket-table>
     </div>
 @endsection

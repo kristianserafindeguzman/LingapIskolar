@@ -3,7 +3,7 @@
 @section("headerside")
     <form
         method="GET"
-        class="w-full max-w-[40%]"
+        class="hidden w-full max-w-[40%] md:block"
         action="{{ route("dashboard") }}"
     >
         <x-text-input
@@ -43,12 +43,13 @@
         </x-page-header>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
+            <x-counter :name="'Open'" :value="1" :color="'green-600'" />
             <x-counter
                 :name="'In Progress'"
                 :value="1"
                 :color="'amber-500'"
             />
-            <x-counter :name="'Closed'" :value="1" :color="'red-600'" />
+            <x-counter :name="'Closed'" :value="1" :color="'zinc-400'" />
         </div>
         <div
             class="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
@@ -58,15 +59,17 @@
                 action="{{ route("dashboard") }}"
                 class="flex w-full items-center gap-6"
             >
-                <input
-                    type="hidden"
-                    name="search"
-                    value="{{ request("search") }}"
-                />
-
                 <div
                     class="flex flex-1 flex-col items-center gap-4 md:flex-row"
                 >
+                    <div class="block w-full md:hidden">
+                        <x-text-input
+                            :id="'search'"
+                            :icon="'bi-search'"
+                            :value="request('search')"
+                            :label="'Search'"
+                        />
+                    </div>
                     <x-select-input
                         :id="'status'"
                         :label="'Filter Status'"

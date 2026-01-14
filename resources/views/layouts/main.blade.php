@@ -8,6 +8,10 @@
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
         />
+        <script
+            defer
+            src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+        ></script>
         @vite("resources/css/app.css")
     </head>
     <body class="flex min-h-screen min-w-screen flex-col overflow-x-hidden">

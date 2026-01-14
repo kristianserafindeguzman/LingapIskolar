@@ -6,12 +6,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TicketDetailsUser extends Component
+class AssignAgentModal extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(public $ticket, public string $user = "user")
+    public function __construct(public $ticket)
     {
         //
     }
@@ -21,6 +21,6 @@ class TicketDetailsUser extends Component
      */
     public function render(): View|Closure|string
     {
-        return view("components.ticket-details-user");
+        return view("components.assign-agent-modal");
     }
 }

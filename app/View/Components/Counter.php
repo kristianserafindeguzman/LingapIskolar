@@ -14,7 +14,7 @@ class Counter extends Component
     public function __construct(
         public string $name,
         public string $value,
-        public ?string $color = "green-600",
+        public ?string $color,
     ) {
         //
     }

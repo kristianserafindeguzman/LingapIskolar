@@ -88,18 +88,15 @@ Route::middleware("auth")->group(function () use ($tickets) {
             );
         }
         if (auth()->user()->isManager()) {
-            abort(
-                501,
-                "TODO: Show dashboard page where they can see all tickets and assign them to agents",
-            );
+            return view("routes.manager-ticket-dashboard", ["tickets" => $tickets]);
         }
         if (auth()->user()->isAgent()) {
             // TODO: Only give tickets agents are handled
-            return view("routes.agent-tickets", ["tickets" => $tickets]);
+            return view("routes.agent-ticket-dashboard", ["tickets" => $tickets]);
         }
 
         // TODO: Check owned tickets
-        return view("routes.user-tickets", ["tickets" => $tickets]);
+        return view("routes.user-ticket-dashboard", ["tickets" => $tickets]);
     })->name("dashboard");
 
     Route::get("/ticket/create", function () {
@@ -131,7 +128,9 @@ Route::middleware("auth")->group(function () use ($tickets) {
             abort(404); // return to admin dashboard instead
         }
         if (auth()->user()->isManager()) {
-            abort(501, "TODO: Show ticket details page in manager mode.");
+            return view("routes.manager-ticket-details", [
+                "ticket" => $indexed_records[$id],
+            ]);
         }
         if (auth()->user()->isAgent()) {
             return view("routes.agent-ticket-details", [
@@ -165,6 +164,27 @@ Route::middleware("auth")->group(function () use ($tickets) {
         if (auth()->user()->isUser()) {
             abort(401);
         }
+        $data = $request->all();
+        $data["ticket_id"] = $id;
+        $data["user_id"] = auth()->user()->id;
+
+        return response()->json(
+            [
+                "status" => 501,
+                "comment" =>
+                    "TODO: Put everything here on controller, including the authorization.",
+                "message" => "Not Implemented: Data still received.",
+                "data" => $data,
+            ],
+            501,
+        );
+    });
+
+    Route::put("/ticket/{id}/assign", function (Request $request, string $id) {
+        if (!auth()->user()->isManager()) {
+            abort(401);
+        }
+
         $data = $request->all();
         $data["ticket_id"] = $id;
         $data["user_id"] = auth()->user()->id;
