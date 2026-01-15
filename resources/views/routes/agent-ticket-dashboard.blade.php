@@ -45,10 +45,26 @@
         </x-page-header>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-            <x-counter :name="'Open'" :value="1" :color="'green-600'" />
-            <x-counter :name="'Pending'" :value="1" :color="'blue-600'" />
-            <x-counter :name="'Escalated'" :value="1" :color="'red-600'" />
-            <x-counter :name="'Resolved'" :value="1" :color="'zinc-400'" />
+            <x-counter
+                :name="'Open'"
+                :value="1"
+                :color="'border-l-green-600'"
+            />
+            <x-counter
+                :name="'Pending'"
+                :value="1"
+                :color="'border-l-blue-600'"
+            />
+            <x-counter
+                :name="'Escalated'"
+                :value="1"
+                :color="'border-l-red-600'"
+            />
+            <x-counter
+                :name="'Resolved'"
+                :value="1"
+                :color="'border-l-zinc-400'"
+            />
         </div>
 
         <div

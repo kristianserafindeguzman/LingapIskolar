@@ -43,13 +43,21 @@
         </x-page-header>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-4">
-            <x-counter :name="'Open'" :value="1" :color="'green-600'" />
+            <x-counter
+                :name="'Open'"
+                :value="1"
+                :color="'border-l-green-600'"
+            />
             <x-counter
                 :name="'In Progress'"
                 :value="1"
-                :color="'amber-500'"
+                :color="'border-l-amber-500'"
             />
-            <x-counter :name="'Closed'" :value="1" :color="'zinc-400'" />
+            <x-counter
+                :name="'Closed'"
+                :value="1"
+                :color="'border-l-zinc-400'"
+            />
         </div>
         <div
             class="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
