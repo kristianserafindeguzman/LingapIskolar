@@ -2,7 +2,7 @@
 @extends("layouts.admin-sidebar")
 
 @section("main")
-    <div class="flex w-full flex-col gap-6 bg-zinc-50/50 p-6 px-10">
+    <div class="flex w-full flex-col gap-6 p-6 px-10">
         <x-page-header>
             <x-slot:header>
                 <div>
@@ -11,9 +11,7 @@
                     >
                         Admin Dashboard
                     </h1>
-                    <p class="text-lg text-zinc-500">
-                        
-                    </p>
+                    <p class="text-lg text-zinc-500"></p>
                 </div>
             </x-slot>
             <x-slot:side>

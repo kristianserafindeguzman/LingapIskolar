@@ -3,7 +3,7 @@
 
 @section("main")
     <div
-        class="flex min-h-[calc(100vh-80px)] w-full items-center justify-center bg-zinc-50/50 p-6"
+        class="flex min-h-[calc(100vh-80px)] w-full items-center justify-center p-6"
     >
         <div
             class="w-full max-w-2xl rounded-2xl border border-zinc-200 bg-white p-10 shadow-xl shadow-zinc-200/50"

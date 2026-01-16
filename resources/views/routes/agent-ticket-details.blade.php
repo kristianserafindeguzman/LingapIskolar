@@ -2,7 +2,7 @@
 @extends("layouts.agent-sidebar")
 
 @section("main")
-    <div class="flex w-full flex-col gap-6 bg-zinc-50/50 p-6 px-10">
+    <div class="flex w-full flex-col gap-6 p-6 px-10">
         <x-page-header>
             <x-slot:header>
                 <h1
@@ -42,7 +42,7 @@
             </x-slot>
         </x-page-header>
         <div class="flex flex-col items-start gap-8 md:flex-row">
-            <div class="flex flex-1 flex-col gap-6 w-full">
+            <div class="flex w-full flex-1 flex-col gap-6">
                 <x-ticket-details
                     :ticket="$ticket"
                     :columns="['subject', 'description', 'category', 'priority']"

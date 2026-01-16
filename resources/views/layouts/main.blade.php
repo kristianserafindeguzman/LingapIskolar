@@ -83,7 +83,7 @@
                 ></div>
             @endauth
 
-            <div class="flex-1 overflow-y-scroll">
+            <div class="flex-1 overflow-y-scroll bg-zinc-50/50">
                 @section("main")
 
                 @show
