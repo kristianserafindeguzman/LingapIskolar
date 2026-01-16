@@ -5,14 +5,9 @@
         :url="'/dashboard'"
     />
     <x-sidebar-navigation
-        :icon="'bi-person-fill-add'"
-        :title="'Manager List'"
-        :url="'/manager'"
-    />
-    <x-sidebar-navigation
-        :icon="'bi-person-fill-up'"
-        :title="'Agent List'"
-        :url="'/agent'"
+        :icon="'bi-plus-circle-fill'"
+        :title="'Create Ticket'"
+        :url="'/ticket/create'"
     />
     <x-sidebar-navigation
         :icon="'bi-gear-fill'"
