@@ -113,6 +113,10 @@ Route::get("/signup", function () {
 })->name("signup");
 
 Route::post("/signup", [UserController::class, "sign"]);
+Route::post("/logout", function () {
+    Auth()->logout();
+    return redirect("/");
+});
 
 // TODO: remove $tickets when implementing the ticket controller now
 Route::middleware("auth")->group(function () use ($agents, $tickets) {

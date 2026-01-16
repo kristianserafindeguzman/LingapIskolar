@@ -65,58 +65,7 @@
             />
         </div>
 
-        <div
-            class="flex items-center justify-between rounded-xl border border-zinc-200 bg-white p-4 shadow-sm"
-        >
-            <form
-                method="GET"
-                action="{{ route("dashboard") }}"
-                class="flex w-full items-center gap-6"
-            >
-                <div
-                    class="flex flex-1 flex-col items-center gap-4 md:flex-row"
-                >
-                    <div class="block w-full md:hidden">
-                        <x-text-input
-                            :id="'search'"
-                            :icon="'bi-search'"
-                            :value="request('search')"
-                            :label="'Search'"
-                        />
-                    </div>
-                    <x-select-input :id="'status'" :label="'Filter Status'">
-                        <option value="">All Statuses</option>
-                        <option value="open">Open</option>
-                        <option value="pending">Pending</option>
-                        <option value="closed">Closed</option>
-                    </x-select-input>
-
-                    <x-select-input
-                        :id="'priority'"
-                        :label="'Priority Level'"
-                    >
-                        <option value="">All Levels</option>
-                        <option value="urgent">Urgent</option>
-                        <option value="high">High</option>
-                        <option value="medium">Medium</option>
-                        <option value="low">Low</option>
-                    </x-select-input>
-                    <div class="flex flex-col items-center gap-2 md:flex-row">
-                        <x-button type="submit" class="min-w-32">
-                            Apply Filters
-                        </x-button>
-                        @if (request()->anyFilled(["status", "priority"]))
-                            <a
-                                href="{{ route("dashboard") }}"
-                                class="flex items-center px-4 text-sm font-medium text-zinc-500 transition hover:text-red-800"
-                            >
-                                Clear
-                            </a>
-                        @endif
-                    </div>
-                </div>
-            </form>
-        </div>
+        <x-filter :filters="['status', 'priority', 'category']" />
 
         <x-ticket-table
             :columns="['id', 'requested_by', 'subject', 'assigned_to', 'status', 'priority']"
