@@ -261,7 +261,7 @@ Route::middleware("auth")->group(function () use ($agents, $tickets) {
 
     Route::put("/manager/add", function (Request $request) {
         if (!auth()->user()->isAdmin()) {
-            abort(401);
+            abort(404);
         }
         $data = $request->all();
 
@@ -274,7 +274,25 @@ Route::middleware("auth")->group(function () use ($agents, $tickets) {
             ],
             501,
         );
-    })->name("manager-list");
+    });
+
+    Route::put("/manager/revoke", function (Request $request) {
+        if (!auth()->user()->isAdmin()) {
+            abort(404);
+        }
+        $data = $request->all();
+
+        return response()->json(
+            [
+                "status" => 501,
+                "comment" =>
+                    "TODO: Revoke the user's special permissions and convert to simple role.",
+                "message" => "Not Implemented: Data still received.",
+                "data" => $data,
+            ],
+            501,
+        );
+    });
 
     Route::get("/agent", function (Request $request) use ($agents) {
         if (!auth()->user()->isAdmin()) {
@@ -285,7 +303,7 @@ Route::middleware("auth")->group(function () use ($agents, $tickets) {
 
     Route::put("/agent/add", function (Request $request) {
         if (!auth()->user()->isAdmin()) {
-            abort(401);
+            abort(404);
         }
         $data = $request->all();
 
@@ -293,6 +311,23 @@ Route::middleware("auth")->group(function () use ($agents, $tickets) {
             [
                 "status" => 501,
                 "comment" => "TODO: Convert the user to agent role.",
+                "message" => "Not Implemented: Data still received.",
+                "data" => $data,
+            ],
+            501,
+        );
+    });
+    Route::put("/agent/revoke", function (Request $request) {
+        if (!auth()->user()->isAdmin()) {
+            abort(404);
+        }
+        $data = $request->all();
+
+        return response()->json(
+            [
+                "status" => 501,
+                "comment" =>
+                    "TODO: Revoke the user's special permissions and convert to simple role.",
                 "message" => "Not Implemented: Data still received.",
                 "data" => $data,
             ],

@@ -76,29 +76,7 @@
                 class="flex flex-row flex-wrap items-center justify-evenly gap-2"
             >
                 @foreach ($agents as $agent)
-                    <div
-                        class="flex w-full max-w-sm flex-row items-center gap-4 rounded-2xl bg-white p-6 shadow-sm transition-all hover:shadow-md"
-                    >
-                        <img
-                            src="/img/emu.jpg"
-                            alt="Agent"
-                            class="h-24 w-24 shrink-0 rounded-full border-4 border-white shadow-lg ring-1 ring-zinc-200"
-                        />
-                        <div class="min-w-0">
-                            <p
-                                class="truncate text-xl font-bold text-zinc-800"
-                                title="{{ $agent["name"] }}"
-                            >
-                                {{ $agent["name"] }}
-                            </p>
-                            <p
-                                class="truncate text-sm font-medium text-zinc-500"
-                                title="{{ $agent["email"] }}"
-                            >
-                                {{ $agent["email"] }}
-                            </p>
-                        </div>
-                    </div>
+                    <x-admin-member-list-card :member="$agent" />
                 @endforeach
             </div>
         </div>
