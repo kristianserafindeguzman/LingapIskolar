@@ -107,10 +107,25 @@
                         </div>
 
                         @if (Auth()->user()->isManager())
-                            <x-assign-agent-modal
-                                :ticket="$ticket"
-                                :agents="$agents"
-                            />
+                            @if ($agentButtonType === "delete")
+                                <form action="/ticket/delete" method="POST">
+                                    @method("DELETE")
+                                    @csrf
+                                    <input
+                                        type="hidden"
+                                        value="{{ $ticket["id"] }}"
+                                        name="id"
+                                    />
+                                    <x-button :type="'submit'">
+                                        Delete
+                                    </x-button>
+                                </form>
+                            @else
+                                <x-assign-agent-modal
+                                    :ticket="$ticket"
+                                    :agents="$agents"
+                                />
+                            @endif
                         @endif
                     </td>
                 </tr>

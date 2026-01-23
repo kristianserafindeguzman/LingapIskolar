@@ -15,6 +15,7 @@ class TicketTable extends Component
         public array $columns,
         public $tickets,
         public ?array $agents = [],
+        public ?string $agentButtonType,
     ) {
         //
     }
