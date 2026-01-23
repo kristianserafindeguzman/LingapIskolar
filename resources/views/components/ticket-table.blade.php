@@ -45,7 +45,9 @@
         </thead>
         <tbody class="divide-y divide-zinc-100">
             @forelse ($tickets as $ticket)
-                <tr class="group transition-all hover:bg-zinc-50/80">
+                <tr
+                    {{ $attributes->merge(["class" => $getRowStyle($ticket["assigned_to"])]) }}
+                >
                     @if (in_array("id", $columns))
                         <td class="px-6 py-5">
                             <span

@@ -27,4 +27,17 @@ class TicketTable extends Component
     {
         return view("components.ticket-table");
     }
+
+    public function getRowStyle(?string $assigned)
+    {
+        $base = "group transition-all hover:bg-zinc-50/80";
+        if (!auth()->user()->isManager()) {
+            return $base;
+        }
+
+        if ($assigned == "Unassigned") {
+            return "group transition-all hover:bg-red-100/80 bg-red-100";
+        }
+        return $base;
+    }
 }

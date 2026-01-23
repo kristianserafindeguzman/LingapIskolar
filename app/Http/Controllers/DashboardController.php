@@ -67,7 +67,17 @@ class DashboardController extends Controller
             "category",
             "currentAssignment.agent",
         ])
+            ->leftJoin(
+                "ticket_assignments",
+                "tickets.id",
+                "=",
+                "ticket_assignments.ticket_id",
+            )
+            ->orderByRaw(
+                "CASE WHEN ticket_assignments.agent_id IS NULL THEN 0 ELSE 1 END ASC",
+            )
             ->orderBy("created_at", "desc")
+            ->select("tickets.*")
             ->filter()
             ->get();
 
@@ -85,7 +95,6 @@ class DashboardController extends Controller
                 ->where("status.name", "Resolved")
                 ->count(),
         ];
-
         return view(
             "routes.manager-ticket-dashboard",
             compact("tickets", "agents", "stats"),
